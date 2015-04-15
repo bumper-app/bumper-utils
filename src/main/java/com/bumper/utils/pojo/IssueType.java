@@ -1,4 +1,4 @@
-package io.bumper.utils.pojo;
+package com.bumper.utils.pojo;
 
 /**
  * Copyright (C) 2015 Mathieu Nayrolles
