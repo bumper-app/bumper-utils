@@ -14,9 +14,9 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package io.bumper.utils.pojo;
+package com.bumper.utils.pojo;
 
-import io.bumper.utils.pojo.changeset.AbstractChangeset;
+import com.bumper.utils.pojo.changeset.AbstractChangeset;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;

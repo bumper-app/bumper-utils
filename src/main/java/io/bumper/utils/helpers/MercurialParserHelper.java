@@ -16,6 +16,8 @@
  */
 package io.bumper.utils.helpers;
 
+import com.bumper.utils.helpers.AbstractParserHelper;
+
 /**
  *
  * @author math
