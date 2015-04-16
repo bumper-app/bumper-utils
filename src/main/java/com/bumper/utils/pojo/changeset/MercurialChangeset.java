@@ -18,7 +18,7 @@ package com.bumper.utils.pojo.changeset;
 
 import com.bumper.utils.pojo.People;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -28,16 +28,32 @@ public class MercurialChangeset extends AbstractChangeset {
 
     /**
      *
-     * @param files
-     * @param hunks
+     * @param bumperId
      * @param commiter
      * @param commitDate
      * @param commitMessage
-     * @param insertions
-     * @param deletions
+     * @param commitRevision
+     * @param changes
      */
-    public MercurialChangeset(List<String> files, List<Hunk> hunks, People commiter, Date commitDate, String commitMessage, int insertions, int deletions) {
-        super(files, hunks, commiter, commitDate, commitMessage, insertions, deletions);
+    public MercurialChangeset(int bumperId, People commiter, Date commitDate, String commitMessage, String commitRevision, Set<Change> changes) {
+        super(bumperId, commiter, commitDate, commitMessage, commitRevision, changes, ChangesetType.MERCURIAL);
+    }
+
+    /**
+     *
+     * @param commiter
+     * @param commitDate
+     * @param commitMessage
+     * @param commitRevision
+     * @param changes
+     */
+    public MercurialChangeset(People commiter, Date commitDate, String commitMessage, String commitRevision, Set<Change> changes) {
+        super(commiter, commitDate, commitMessage, commitRevision, changes, ChangesetType.MERCURIAL);
+    }
+
+    @Override
+    public String toSolrXML() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

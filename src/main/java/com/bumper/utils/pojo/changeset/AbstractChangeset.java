@@ -17,74 +17,109 @@
 package com.bumper.utils.pojo.changeset;
 
 import com.bumper.utils.pojo.People;
+import com.bumper.utils.pojo.interfaces.SolrSerializable;
 import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.Set;
 
 /**
  *
  * @author math
  */
-public abstract class AbstractChangeset {
-
-    List<String> files;
-    List<Hunk> hunks;
-    People commiter;
-    Date commitDate;
-    String commitMessage;
-    int insertions;
-    int deletions;
+public abstract class AbstractChangeset implements SolrSerializable {
 
     /**
      *
-     * @param files
-     * @param hunks
+     */
+    protected int id;
+
+    /**
+     *
+     */
+    protected People commiter;
+
+    /**
+     *
+     */
+    protected Date commitDate;
+
+    /**
+     *
+     */
+    protected String commitMessage;
+
+    /**
+     *
+     */
+    protected String commitRevision;
+
+    /**
+     *
+     */
+    protected Set<Change> changes;
+
+    /**
+     *
+     */
+    protected ChangesetType changesetType;
+
+    /**
+     *
+     */
+    public AbstractChangeset() {
+    }
+
+    /**
+     *
+     * @param bumperId
      * @param commiter
      * @param commitDate
      * @param commitMessage
-     * @param insertions
-     * @param deletions
+     * @param commitRevision
+     * @param changes
+     * @param changesetType
      */
-    public AbstractChangeset(List<String> files, List<Hunk> hunks, People commiter, Date commitDate, String commitMessage, int insertions, int deletions) {
-        this.files = files;
-        this.hunks = hunks;
+    public AbstractChangeset(int bumperId, People commiter, Date commitDate, String commitMessage, String commitRevision, Set<Change> changes, ChangesetType changesetType) {
+        this.id = bumperId;
         this.commiter = commiter;
         this.commitDate = commitDate;
         this.commitMessage = commitMessage;
-        this.insertions = insertions;
-        this.deletions = deletions;
+        this.commitRevision = commitRevision;
+        this.changes = changes;
+        this.changesetType = changesetType;
+    }
+
+    /**
+     *
+     * @param commiter
+     * @param commitDate
+     * @param commitMessage
+     * @param commitRevision
+     * @param changes
+     * @param changesetType
+     */
+    public AbstractChangeset(People commiter, Date commitDate, String commitMessage, String commitRevision, Set<Change> changes, ChangesetType changesetType) {
+        this.commiter = commiter;
+        this.commitDate = commitDate;
+        this.commitMessage = commitMessage;
+        this.commitRevision = commitRevision;
+        this.changes = changes;
+        this.changesetType = changesetType;
     }
 
     /**
      *
      * @return
      */
-    public List<String> getFiles() {
-        return files;
+    public int getId() {
+        return id;
     }
 
     /**
      *
-     * @param files
+     * @param bumperId
      */
-    public void setFiles(List<String> files) {
-        this.files = files;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<Hunk> getHunks() {
-        return hunks;
-    }
-
-    /**
-     *
-     * @param hunks
-     */
-    public void setHunks(List<Hunk> hunks) {
-        this.hunks = hunks;
+    public void setId(int bumperId) {
+        this.id = bumperId;
     }
 
     /**
@@ -139,87 +174,48 @@ public abstract class AbstractChangeset {
      *
      * @return
      */
-    public int getInsertions() {
-        return insertions;
+    public String getCommitRevision() {
+        return commitRevision;
     }
 
     /**
      *
-     * @param insertions
+     * @param commitRevision
      */
-    public void setInsertions(int insertions) {
-        this.insertions = insertions;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public int getDeletions() {
-        return deletions;
-    }
-
-    /**
-     *
-     * @param deletions
-     */
-    public void setDeletions(int deletions) {
-        this.deletions = deletions;
+    public void setCommitRevision(String commitRevision) {
+        this.commitRevision = commitRevision;
     }
 
     /**
      *
      * @return
      */
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 79 * hash + Objects.hashCode(this.files);
-        hash = 79 * hash + Objects.hashCode(this.hunks);
-        hash = 79 * hash + Objects.hashCode(this.commiter);
-        hash = 79 * hash + Objects.hashCode(this.commitDate);
-        hash = 79 * hash + Objects.hashCode(this.commitMessage);
-        hash = 79 * hash + this.insertions;
-        hash = 79 * hash + this.deletions;
-        return hash;
+    public Set<Change> getChanges() {
+        return changes;
     }
 
     /**
      *
-     * @param obj
+     * @param changes
+     */
+    public void setChanges(Set<Change> changes) {
+        this.changes = changes;
+    }
+
+    /**
+     *
      * @return
      */
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final AbstractChangeset other = (AbstractChangeset) obj;
-        if (!Objects.equals(this.files, other.files)) {
-            return false;
-        }
-        if (!Objects.equals(this.hunks, other.hunks)) {
-            return false;
-        }
-        if (!Objects.equals(this.commiter, other.commiter)) {
-            return false;
-        }
-        if (!Objects.equals(this.commitDate, other.commitDate)) {
-            return false;
-        }
-        if (!Objects.equals(this.commitMessage, other.commitMessage)) {
-            return false;
-        }
-        if (this.insertions != other.insertions) {
-            return false;
-        }
-        if (this.deletions != other.deletions) {
-            return false;
-        }
-        return true;
+    public ChangesetType getChangesetType() {
+        return changesetType;
+    }
+
+    /**
+     *
+     * @param changesetType
+     */
+    public void setChangesetType(ChangesetType changesetType) {
+        this.changesetType = changesetType;
     }
 
     /**
@@ -228,7 +224,7 @@ public abstract class AbstractChangeset {
      */
     @Override
     public String toString() {
-        return "AbstractChangeset{" + "files=" + files + ", hunks=" + hunks + ", commiter=" + commiter + ", commitDate=" + commitDate + ", commitMessage=" + commitMessage + ", insertions=" + insertions + ", deletions=" + deletions + '}';
+        return "AbstractChangeset{" + "bumperId=" + id + ", commiter=" + commiter + ", commitDate=" + commitDate + ", commitMessage=" + commitMessage + ", commitRevision=" + commitRevision + ", changes=" + changes + ", changesetType=" + changesetType + '}';
     }
 
 }

@@ -16,10 +16,130 @@
  */
 package com.bumper.utils.pojo;
 
+import java.io.Serializable;
+import java.util.Objects;
+
 /**
  *
  * @author math
  */
-public class People {
+public class People implements Serializable {
+
+    private int id;
+    private String name;
+    private String pseudo;
+
+    public People() {
+    }
+
+    public People(int id) {
+        this.id = id;
+    }
+
+    /**
+     *
+     * @param name
+     * @param pseudo
+     */
+    public People(String name, String pseudo) {
+        this.name = name;
+        this.pseudo = pseudo;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     *
+     * @param name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getPseudo() {
+        return pseudo;
+    }
+
+    /**
+     *
+     * @param pseudo
+     */
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     *
+     * @param bumperID
+     */
+    public void setId(int bumperID) {
+        this.id = bumperID;
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public String toString() {
+        return "People{" + "bumperID=" + id + ", name=" + name + ", pseudo=" + pseudo + '}';
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 83 * hash + this.id;
+        hash = 83 * hash + Objects.hashCode(this.name);
+        hash = 83 * hash + Objects.hashCode(this.pseudo);
+        return hash;
+    }
+
+    /**
+     *
+     * @param obj
+     * @return
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final People other = (People) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.pseudo, other.pseudo)) {
+            return false;
+        }
+        return true;
+    }
 
 }
