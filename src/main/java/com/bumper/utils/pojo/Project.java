@@ -16,11 +16,13 @@
  */
 package com.bumper.utils.pojo;
 
+import java.io.Serializable;
+
 /**
  *
  * @author math
  */
-public class Project {
+public class Project implements Serializable {
 
     private int id;
     private String name;

@@ -16,11 +16,13 @@
  */
 package com.bumper.utils.pojo;
 
+import java.io.Serializable;
+
 /**
  *
  * @author math
  */
-public class File {
+public class File implements Serializable {
 
     private int id;
     private String name;
@@ -61,8 +63,6 @@ public class File {
     public void setId(int id) {
         this.id = id;
     }
-
-    
 
     /**
      *

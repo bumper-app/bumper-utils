@@ -16,13 +16,14 @@
  */
 package com.bumper.utils.pojo;
 
+import java.io.Serializable;
 import java.util.Set;
 
 /**
  *
  * @author math
  */
-public class Dataset {
+public class Dataset implements Serializable {
 
     private int id;
     private String name;
