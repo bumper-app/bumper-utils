@@ -29,9 +29,16 @@ public class People implements Serializable {
     private String name;
     private String pseudo;
 
+    /**
+     *
+     */
     public People() {
     }
 
+    /**
+     *
+     * @param id
+     */
     public People(int id) {
         this.id = id;
     }

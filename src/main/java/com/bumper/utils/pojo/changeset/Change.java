@@ -33,13 +33,29 @@ public class Change implements SolrSerializable {
     private int deletion;
     private File file;
 
+    /**
+     *
+     */
     public Change() {
     }
 
+    /**
+     *
+     * @param bumperID
+     */
     public Change(int bumperID) {
         this.id = bumperID;
     }
 
+    /**
+     *
+     * @param bumperID
+     * @param changes
+     * @param position
+     * @param insertion
+     * @param deletion
+     * @param file
+     */
     public Change(int bumperID, List<String> changes, String position, int insertion, int deletion, File file) {
         this.id = bumperID;
         this.changes = changes;
@@ -49,54 +65,106 @@ public class Change implements SolrSerializable {
         this.file = file;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     *
+     * @param bumperID
+     */
     public void setId(int bumperID) {
         this.id = bumperID;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<String> getChanges() {
         return changes;
     }
 
+    /**
+     *
+     * @param changes
+     */
     public void setChanges(List<String> changes) {
         this.changes = changes;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPosition() {
         return position;
     }
 
+    /**
+     *
+     * @param position
+     */
     public void setPosition(String position) {
         this.position = position;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getInsertion() {
         return insertion;
     }
 
+    /**
+     *
+     * @param insertion
+     */
     public void setInsertion(int insertion) {
         this.insertion = insertion;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getDeletion() {
         return deletion;
     }
 
+    /**
+     *
+     * @param deletion
+     */
     public void setDeletion(int deletion) {
         this.deletion = deletion;
     }
 
+    /**
+     *
+     * @return
+     */
     public File getFile() {
         return file;
     }
 
+    /**
+     *
+     * @param file
+     */
     public void setFile(File file) {
         this.file = file;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -104,6 +172,11 @@ public class Change implements SolrSerializable {
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {

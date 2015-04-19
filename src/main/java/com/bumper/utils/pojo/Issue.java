@@ -146,10 +146,18 @@ public class Issue implements SolrSerializable {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getTargetVersion() {
         return targetVersion;
     }
 
+    /**
+     *
+     * @param targetVersion
+     */
     public void setTargetVersion(String targetVersion) {
         this.targetVersion = targetVersion;
     }
