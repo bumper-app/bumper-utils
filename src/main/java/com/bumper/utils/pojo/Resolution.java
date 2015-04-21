@@ -25,5 +25,5 @@ public enum Resolution {
     /**
      *
      */
-    RESOLVED;
+    FIXED;
 }

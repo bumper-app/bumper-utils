@@ -53,6 +53,10 @@ public class People implements Serializable {
         this.pseudo = pseudo;
     }
 
+    public People(String name) {
+        this.name = name;
+    }
+
     /**
      *
      * @return

@@ -25,5 +25,5 @@ public enum Status {
     /**
      *
      */
-    CLOSED;
+    RESOLVED;
 }

@@ -25,16 +25,17 @@ public enum LifecycleEventType {
     /**
      *
      */
+    /**
+     *
+     */
     OPEN,
-
     /**
      *
      */
-    CLOSE,
-
+    CLOSED,
     /**
      *
      */
-    ASSIGNED;
+    ASSIGNED, RESOLVED, CREATED, REPORTED, REOPENNED;
 
 }

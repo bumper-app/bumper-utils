@@ -26,5 +26,4 @@ public enum IssueType {
      *
      */
     BUG;
-
 }

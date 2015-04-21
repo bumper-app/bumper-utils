@@ -22,4 +22,5 @@ package com.bumper.utils.pojo;
  */
 public enum Severity {
 
+    MAJOR;
 }

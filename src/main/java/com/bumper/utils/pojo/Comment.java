@@ -35,6 +35,11 @@ public class Comment {
     public Comment() {
     }
 
+    public Comment(People commenter, Date dateComment) {
+        this.commenter = commenter;
+        this.dateComment = dateComment;
+    }
+
     /**
      *
      * @return
@@ -104,39 +109,8 @@ public class Comment {
      * @return
      */
     @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + this.id;
-        return hash;
-    }
-
-    /**
-     *
-     * @param obj
-     * @return
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Comment other = (Comment) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
     public String toString() {
-        return "Comment{" + "bumperID=" + id + ", commenter=" + commenter + ", comment=" + comment + ", dateComment=" + dateComment + '}';
+        return "\n \t Comment{" + "bumperID=" + id + ", commenter=" + commenter + ", comment=" + comment + ", dateComment=" + dateComment + '}';
     }
 
 }

@@ -57,6 +57,12 @@ public class LifecycleEvent {
         this.eventType = eventType;
     }
 
+    public LifecycleEvent(Date date, People people, LifecycleEventType eventType) {
+        this.date = date;
+        this.people = people;
+        this.eventType = eventType;
+    }
+
     /**
      *
      * @return
@@ -126,39 +132,8 @@ public class LifecycleEvent {
      * @return
      */
     @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 23 * hash + this.id;
-        return hash;
-    }
-
-    /**
-     *
-     * @param obj
-     * @return
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final LifecycleEvent other = (LifecycleEvent) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
     public String toString() {
-        return "LifecycleEvent{" + "id=" + id + ", date=" + date + ", people=" + people + ", eventType=" + eventType + '}';
+        return "\n \t LifecycleEvent{" + "id=" + id + ", date=" + date + ", people=" + people + ", eventType=" + eventType + '}';
     }
 
 }

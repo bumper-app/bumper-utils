@@ -35,6 +35,10 @@ public class Dataset implements Serializable {
     public Dataset() {
     }
 
+    public Dataset(String name) {
+        this.name = name;
+    }
+
     /**
      *
      * @param id

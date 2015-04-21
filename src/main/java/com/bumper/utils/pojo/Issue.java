@@ -18,6 +18,8 @@ package com.bumper.utils.pojo;
 
 import com.bumper.utils.pojo.changeset.AbstractChangeset;
 import com.bumper.utils.pojo.interfaces.SolrSerializable;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -29,7 +31,9 @@ public class Issue implements SolrSerializable {
     private int id;
     private String targetVersion;
     private Dataset dataset;
-    private People people;
+    private People reporter;
+    private People assignee;
+
     private Project project;
     private String exteralId;
 
@@ -42,9 +46,11 @@ public class Issue implements SolrSerializable {
 
     private IssueType issueType;
 
-    private Set<LifecycleEvent> issueEvents;
-    private Set<Comment> comments;
-    private Set<AbstractChangeset> changesets;
+    private String environment;
+
+    private Set<LifecycleEvent> issueEvents = new HashSet<>();
+    private Set<Comment> comments = new HashSet<>();
+    private Set<AbstractChangeset> changesets = new HashSet<>();
 
     /**
      *
@@ -72,7 +78,7 @@ public class Issue implements SolrSerializable {
     public Issue(String version, Dataset dataset, People people, Project project, String exteralId, Status status, Severity severity, Resolution resolution, String shortDescription, String longDescription, IssueType issueType, Set<LifecycleEvent> issueEvents, Set<Comment> comments, Set<AbstractChangeset> changesets) {
         this.targetVersion = version;
         this.dataset = dataset;
-        this.people = people;
+        this.reporter = people;
         this.project = project;
         this.exteralId = exteralId;
         this.status = status;
@@ -108,7 +114,7 @@ public class Issue implements SolrSerializable {
         this.id = id;
         this.targetVersion = version;
         this.dataset = dataset;
-        this.people = people;
+        this.reporter = people;
         this.project = project;
         this.exteralId = exteralId;
         this.status = status;
@@ -178,20 +184,32 @@ public class Issue implements SolrSerializable {
         this.dataset = dataset;
     }
 
-    /**
-     *
-     * @return
-     */
-    public People getPeople() {
-        return people;
+    public People getReporter() {
+        return reporter;
     }
 
-    /**
-     *
-     * @param people
-     */
-    public void setPeople(People people) {
-        this.people = people;
+    public void setReporter(People reporter) {
+        this.reporter = reporter;
+    }
+
+    public void addComment(Comment comment) {
+        this.comments.add(comment);
+    }
+
+    public String getEnvironment() {
+        return environment;
+    }
+
+    public void setEnvironment(String environment) {
+        this.environment = environment;
+    }
+
+    public People getAssignee() {
+        return assignee;
+    }
+
+    public void setAssignee(People assignee) {
+        this.assignee = assignee;
     }
 
     /**
@@ -370,9 +388,22 @@ public class Issue implements SolrSerializable {
         this.changesets = changesets;
     }
 
+    public void addLifeCycleEvent(Date date, People people, LifecycleEventType type) {
+        this.issueEvents.add(new LifecycleEvent(date, people, type));
+    }
+
+    public void addLifeCycleEvent(LifecycleEvent lifecycleEvent) {
+        this.issueEvents.add(lifecycleEvent);
+    }
+
     @Override
     public String toSolrXML() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String toString() {
+        return "Issue{" + "id=" + id + " \n, targetVersion=" + targetVersion + " \n, dataset=" + dataset + " \n, reporter=" + reporter + " \n, assignee=" + assignee + " \n, project=" + project + " \n, exteralId=" + exteralId + " \n, status=" + status + " \n, severity=" + severity + " \n, resolution=" + resolution + " \n, shortDescription=" + shortDescription + " \n, longDescription=" + longDescription + " \n, issueType=" + issueType + " \n, issueEvents=" + issueEvents + " \n, comments=" + comments + " \n, changesets=" + changesets + '}';
     }
 
 }

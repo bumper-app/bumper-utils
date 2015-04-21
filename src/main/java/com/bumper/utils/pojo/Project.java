@@ -43,6 +43,17 @@ public class Project implements Serializable {
         this.id = bumperID;
     }
 
+    public Project(String name, Dataset dataset) {
+        this.name = name;
+        this.dataset = dataset;
+    }
+
+    public Project(String name, Dataset dataset, Project parentProject) {
+        this.name = name;
+        this.dataset = dataset;
+        this.parentProject = parentProject;
+    }
+
     /**
      *
      * @return
