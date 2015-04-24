@@ -17,7 +17,7 @@
 package com.bumper.utils.pojo.changeset;
 
 import com.bumper.utils.pojo.People;
-import com.bumper.utils.pojo.interfaces.SolrSerializable;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
@@ -25,7 +25,7 @@ import java.util.Set;
  *
  * @author math
  */
-public abstract class AbstractChangeset implements SolrSerializable {
+public abstract class AbstractChangeset implements Serializable {
 
     /**
      *

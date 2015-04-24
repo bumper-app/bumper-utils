@@ -51,9 +51,4 @@ public class MercurialChangeset extends AbstractChangeset {
         super(commiter, commitDate, commitMessage, commitRevision, changes, ChangesetType.MERCURIAL);
     }
 
-    @Override
-    public String toSolrXML() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

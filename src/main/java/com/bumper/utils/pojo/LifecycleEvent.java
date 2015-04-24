@@ -27,7 +27,8 @@ public class LifecycleEvent {
     private int id;
     private Date date;
     private People people;
-    private LifecycleEventType eventType;
+    private String eventType;
+    private String message;
 
     /**
      *
@@ -50,17 +51,24 @@ public class LifecycleEvent {
      * @param people
      * @param eventType
      */
-    public LifecycleEvent(int id, Date date, People people, LifecycleEventType eventType) {
+    public LifecycleEvent(int id, Date date, People people, String eventType) {
         this.id = id;
         this.date = date;
         this.people = people;
         this.eventType = eventType;
     }
 
-    public LifecycleEvent(Date date, People people, LifecycleEventType eventType) {
+    public LifecycleEvent(Date date, People people, String eventType) {
         this.date = date;
         this.people = people;
         this.eventType = eventType;
+    }
+
+    public LifecycleEvent(Date date, People people, String eventType, String message) {
+        this.date = date;
+        this.people = people;
+        this.eventType = eventType;
+        this.message = message;
     }
 
     /**
@@ -111,29 +119,25 @@ public class LifecycleEvent {
         this.people = people;
     }
 
-    /**
-     *
-     * @return
-     */
-    public LifecycleEventType getEventType() {
+    public String getEventType() {
         return eventType;
     }
 
-    /**
-     *
-     * @param eventType
-     */
-    public void setEventType(LifecycleEventType eventType) {
+    public void setEventType(String eventType) {
         this.eventType = eventType;
     }
 
-    /**
-     *
-     * @return
-     */
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     @Override
     public String toString() {
-        return "\n \t LifecycleEvent{" + "id=" + id + ", date=" + date + ", people=" + people + ", eventType=" + eventType + '}';
+        return "\n \t LifecycleEvent{" + "id=" + id + ", date=" + date + ", people=" + people + ", eventType=" + eventType + ", message=" + message + '}';
     }
 
 }

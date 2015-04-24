@@ -17,6 +17,8 @@
 package com.bumper.utils.pojo.interfaces;
 
 import java.io.Serializable;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamWriter;
 
 /**
  *
@@ -28,5 +30,5 @@ public interface SolrSerializable extends Serializable {
      *
      * @return
      */
-    public String toSolrXML();
+    public void toSolrXML(XMLStreamWriter streamWriter) throws XMLStreamException;
 }

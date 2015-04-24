@@ -21,6 +21,8 @@ import com.bumper.utils.pojo.interfaces.SolrSerializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamWriter;
 
 /**
  *
@@ -37,104 +39,20 @@ public class Issue implements SolrSerializable {
     private Project project;
     private String exteralId;
 
-    private Status status;
-    private Severity severity;
-    private Resolution resolution;
+    private String status;
+    private String severity;
+    private String resolution;
 
     private String shortDescription;
     private String longDescription;
 
-    private IssueType issueType;
+    private String issueType;
 
     private String environment;
 
     private Set<LifecycleEvent> issueEvents = new HashSet<>();
     private Set<Comment> comments = new HashSet<>();
     private Set<AbstractChangeset> changesets = new HashSet<>();
-
-    /**
-     *
-     */
-    public Issue() {
-    }
-
-    /**
-     *
-     * @param version
-     * @param dataset
-     * @param people
-     * @param project
-     * @param exteralId
-     * @param status
-     * @param severity
-     * @param resolution
-     * @param shortDescription
-     * @param longDescription
-     * @param issueType
-     * @param issueEvents
-     * @param comments
-     * @param changesets
-     */
-    public Issue(String version, Dataset dataset, People people, Project project, String exteralId, Status status, Severity severity, Resolution resolution, String shortDescription, String longDescription, IssueType issueType, Set<LifecycleEvent> issueEvents, Set<Comment> comments, Set<AbstractChangeset> changesets) {
-        this.targetVersion = version;
-        this.dataset = dataset;
-        this.reporter = people;
-        this.project = project;
-        this.exteralId = exteralId;
-        this.status = status;
-        this.severity = severity;
-        this.resolution = resolution;
-        this.shortDescription = shortDescription;
-        this.longDescription = longDescription;
-        this.issueType = issueType;
-        this.issueEvents = issueEvents;
-        this.comments = comments;
-        this.changesets = changesets;
-    }
-
-    /**
-     *
-     * @param id
-     * @param version
-     * @param dataset
-     * @param people
-     * @param project
-     * @param exteralId
-     * @param status
-     * @param severity
-     * @param resolution
-     * @param shortDescription
-     * @param longDescription
-     * @param issueType
-     * @param issueEvents
-     * @param comments
-     * @param changesets
-     */
-    public Issue(int id, String version, Dataset dataset, People people, Project project, String exteralId, Status status, Severity severity, Resolution resolution, String shortDescription, String longDescription, IssueType issueType, Set<LifecycleEvent> issueEvents, Set<Comment> comments, Set<AbstractChangeset> changesets) {
-        this.id = id;
-        this.targetVersion = version;
-        this.dataset = dataset;
-        this.reporter = people;
-        this.project = project;
-        this.exteralId = exteralId;
-        this.status = status;
-        this.severity = severity;
-        this.resolution = resolution;
-        this.shortDescription = shortDescription;
-        this.longDescription = longDescription;
-        this.issueType = issueType;
-        this.issueEvents = issueEvents;
-        this.comments = comments;
-        this.changesets = changesets;
-    }
-
-    /**
-     *
-     * @param id
-     */
-    public Issue(int id) {
-        this.id = id;
-    }
 
     /**
      *
@@ -248,54 +166,6 @@ public class Issue implements SolrSerializable {
      *
      * @return
      */
-    public Status getStatus() {
-        return status;
-    }
-
-    /**
-     *
-     * @param status
-     */
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Severity getSeverity() {
-        return severity;
-    }
-
-    /**
-     *
-     * @param severity
-     */
-    public void setSeverity(Severity severity) {
-        this.severity = severity;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Resolution getResolution() {
-        return resolution;
-    }
-
-    /**
-     *
-     * @param resolution
-     */
-    public void setResolution(Resolution resolution) {
-        this.resolution = resolution;
-    }
-
-    /**
-     *
-     * @return
-     */
     public String getShortDescription() {
         return shortDescription;
     }
@@ -322,22 +192,6 @@ public class Issue implements SolrSerializable {
      */
     public void setLongDescription(String longDescription) {
         this.longDescription = longDescription;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public IssueType getIssueType() {
-        return issueType;
-    }
-
-    /**
-     *
-     * @param issueType
-     */
-    public void setIssueType(IssueType issueType) {
-        this.issueType = issueType;
     }
 
     /**
@@ -388,7 +242,43 @@ public class Issue implements SolrSerializable {
         this.changesets = changesets;
     }
 
-    public void addLifeCycleEvent(Date date, People people, LifecycleEventType type) {
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getSeverity() {
+        return severity;
+    }
+
+    public void setSeverity(String severity) {
+        this.severity = severity;
+    }
+
+    public String getResolution() {
+        return resolution;
+    }
+
+    public void setResolution(String resolution) {
+        this.resolution = resolution;
+    }
+
+    public String getIssueType() {
+        return issueType;
+    }
+
+    public void setIssueType(String issueType) {
+        this.issueType = issueType;
+    }
+
+    public void addLifeCycleEvent(Date date, People people, String type, String message) {
+        this.issueEvents.add(new LifecycleEvent(date, people, type, message));
+    }
+
+    public void addLifeCycleEvent(Date date, People people, String type) {
         this.issueEvents.add(new LifecycleEvent(date, people, type));
     }
 
@@ -397,8 +287,20 @@ public class Issue implements SolrSerializable {
     }
 
     @Override
-    public String toSolrXML() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void toSolrXML(XMLStreamWriter writer) throws XMLStreamException {
+        writer.writeStartElement("doc");
+        // ID
+        writer.writeStartElement("field");
+        writer.writeAttribute("name", "id");
+        writer.writeCharacters(this.issueType + "_" + this.dataset.getName() + "_" + this.exteralId);
+        // END ID
+        // DATES
+        for (LifecycleEvent le : issueEvents) {
+            writer.writeStartElement("field");
+            writer.writeAttribute("name", "lifecyleevent");
+            writer.writeAttribute("name", "id");
+        }
+
     }
 
     @Override

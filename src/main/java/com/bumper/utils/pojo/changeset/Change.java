@@ -17,14 +17,14 @@
 package com.bumper.utils.pojo.changeset;
 
 import com.bumper.utils.pojo.File;
-import com.bumper.utils.pojo.interfaces.SolrSerializable;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author math
  */
-public class Change implements SolrSerializable {
+public class Change implements Serializable {
 
     private int id;
     private List<String> changes;
@@ -190,11 +190,6 @@ public class Change implements SolrSerializable {
             return false;
         }
         return true;
-    }
-
-    @Override
-    public String toSolrXML() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
