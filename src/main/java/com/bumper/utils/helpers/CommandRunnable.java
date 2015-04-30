@@ -16,12 +16,17 @@
  */
 package com.bumper.utils.helpers;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class CommandRunnable implements Runnable {
 
+    private static int nbCommand = 0;
+    private static double totalTime = 0;
+    private static double averageTime = 0;
     private final String command;
     private final String id;
 
@@ -33,22 +38,40 @@ public class CommandRunnable implements Runnable {
     @Override
     public void run() {
 
+        nbCommand++;
+
         Process p;
 
         try {
+            long prev = System.currentTimeMillis();
+
             p = Runtime
                     .getRuntime()
                     .exec(command);
 
+            BufferedReader in = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+            String line;
+            while ((line = in.readLine()) != null) {
+                System.out.println(line);
+            }
             p.waitFor();
 
-            System.out.println(id);
+            in.close();
+
+            long now = System.currentTimeMillis();
+            totalTime += now - prev;
+            averageTime = totalTime / nbCommand;
+            double minutesRemaining = (((27400 - nbCommand) * averageTime) / 1000) / 60;
+
+            System.out.println(id + " (in " + (now - prev) / 1000d + "s; avg:" + averageTime / 1000
+                    + "; at current avg:" + minutesRemaining + " min remaining");
 
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (InterruptedException ex) {
             Logger.getLogger(CommandRunnable.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
 }
